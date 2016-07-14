@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>管理后台-首页</title>
+		<link rel="stylesheet" href="${rootPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${rootPath}/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="${rootPath}/css/admin.css" />
+		<link rel="stylesheet" href="${rootPath}/css/timeline.css" />
+		<link rel="stylesheet" href="${rootPath}/css/metisMenu.min.css" />
+		<link rel="stylesheet" href="${rootPath}/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="${rootPath}/css/morris.css" />
+		<link rel="stylesheet" href="${rootPath}/css/dataTables.bootstrap.css">
+		<link rel="stylesheet" href="${rootPath}/css/dataTables.responsive.css">
+		<style>
+			body{
+				padding: 0;
+				margin: 0;
+			}
+			table>thead>tr>th{
+				text-align:center;
+			}
+			table td {
+			  	white-space: nowrap;
+			  	overflow: hidden;
+			  	text-overflow: ellipsis;
+			}
+		</style>
+	</head>
+<body>
+	<div id="wrapper">
+       	<#include "common/_header.html">
+        <div id="page-wrapper">
+            <div class="row">
+            	<div class="col-lg-12" style="margin-top:10px;margin-bottom:-10px;">
+                	<ol class="breadcrumb">
+					  <li><i class="fa fa-home fa-fw"></i><a href="${rootPath}/task/">Home</a></li>
+					  <li class="active">广告列表</li>
+					</ol>
+            	</div>
+            	<!-- <div class="col-lg-1" style="margin-top:10px;margin-bottom:-10px;">
+            		<button class="btn btn-primary">返回</button>
+            	</div> -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            	广告列表
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover text-center" id="task_tables">
+                                    <thead>
+                                        <tr>
+                                        	<th>id</th>
+                                            <th>渠道名称</th>
+                                            <th>产品名称</th>
+                                            <th>页面名称</th>
+                                            <th>广告位置</th>
+                                            <th>广告内容</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <#list adinfos as ad>
+                                    	<tr>
+                                    		<td>${ad.id}</td>
+                                    		<td>${ad.channel_id}</td>
+                                    		<td>${ad.product_id}</td>
+                                    		<td>${ad.page_id}</td>
+                                    		<td>${ad.ad_position_id}</td>
+                                    		<td>${ad.content}</td>
+                                    		<td>${ad.status}</td>
+                                    		<td>修改</td>
+                                    	</tr>
+                                    	</#list>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+<script type="text/javascript" src="${rootPath}/js/jquery-1.11.3.js" ></script>
+<script type="text/javascript" src="${rootPath}/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="${rootPath}/js/admin.js" ></script>
+<script type="text/javascript" src="${rootPath}/js/metisMenu.min.js" ></script>
+<script type="text/javascript" src="${rootPath}/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${rootPath}/js/dataTables.bootstrap.min.js" ></script>
+<script>
+	$(document).ready(function() {
+	    $('#task_tables').DataTable({
+	            responsive: true,
+	            bLengthChange: false, //改变每页显示数据数量
+	            bFilter: false, //过滤功能
+	            bSort: false, //排序功能
+	            bAutoWidth: false,//自动宽度
+	            aaSorting: [
+					[ 0, "desc" ]
+				],
+				aoColumnDefs: [
+					{ "bSearchable": false, "bVisible": false, "aTargets": [0] }
+				],
+				language: {
+			       "sZeroRecords": "没有匹配结果",
+			       "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+			       "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+			       "sEmptyTable": "表中数据为空",
+			       "sLoadingRecords": "载入中...",
+			       "sInfoThousands": ",",
+			       "oPaginate": {
+			           "sFirst": "首页",
+			           "sPrevious": "上页",
+			           "sNext": "下页",
+			           "sLast": "末页"
+			       }
+			   }
+	    }); 
+	});
+</script>
+</body>
+</html>
