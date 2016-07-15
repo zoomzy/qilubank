@@ -18,7 +18,7 @@ public class LoginInterceptor implements Interceptor {
 		// TODO Auto-generated method stub
 		Controller controller = inv.getController();
 		HttpSession session = controller.getSession();
-		String userName = (String) session.getAttribute("ad_channel_user");
+		String userName = (String) session.getAttribute("user");
 		
 		if(userName == null || "".equals(userName)){
 			controller.redirect("/");

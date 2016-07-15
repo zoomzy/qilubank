@@ -1,15 +1,15 @@
 package cn.yicha.adchannel.service;
 
-import cn.yicha.adchannel.dao.SysUserDao;
+import cn.yicha.adchannel.dao.UserDao;
 
 /** 
  * @TODO
- * @author yicha
- * @date   2015年10月20日 
+ * @author zhangcc
+ * @date   2016年7月15日 
  */
 public class LoginService {
 
-	private SysUserDao sysUserDao = SysUserDao.getInstance();
+	private UserDao userDao = UserDao.getInstance();
 	
 	private static LoginService instance = null;
 	
@@ -33,6 +33,6 @@ public class LoginService {
 	 * @return
 	 */
 	public boolean loginValidate(String userName, String password){
-		return sysUserDao.loginValidate(userName, password);
+		return userDao.loginValidate(userName, password);
 	}
 }

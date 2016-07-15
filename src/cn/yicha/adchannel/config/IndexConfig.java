@@ -1,12 +1,5 @@
 package cn.yicha.adchannel.config;
 
-import cn.yicha.adchannel.inteceptor.LoginInterceptor;
-import cn.yicha.adchannel.model.AdInfo;
-import cn.yicha.adchannel.model.Channel;
-import cn.yicha.adchannel.model.Product;
-import cn.yicha.adchannel.model.SysUser;
-import cn.yicha.adchannel.route.ControllerRoutes;
-
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -18,6 +11,10 @@ import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
+
+import cn.yicha.adchannel.inteceptor.LoginInterceptor;
+import cn.yicha.adchannel.model.User;
+import cn.yicha.adchannel.route.ControllerRoutes;
 
 /**
  * @TODO
@@ -56,13 +53,7 @@ public class IndexConfig extends JFinalConfig {
 		me.add(arpYx);
 		arpYx.setShowSql(true);
 		// 系统用户表
-		arpYx.addMapping("sys_user", SysUser.class);
-		//渠道表
-		arpYx.addMapping("channel", "id", Channel.class);
-		//产品表
-		arpYx.addMapping("product","id", Product.class);
-		//广告信息表
-		arpYx.addMapping("ad_info", AdInfo.class);
+		arpYx.addMapping("user", User.class);
 	}
 
 	@Override

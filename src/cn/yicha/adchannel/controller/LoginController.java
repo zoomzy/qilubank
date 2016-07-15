@@ -27,11 +27,12 @@ public class LoginController extends Controller {
 	public void loginValidate(){
 		String userName = getPara("username");
 		String password = getPara("userpass");
-		
+		System.out.println(userName);
+		System.out.println(password);
 		boolean result = loginService.loginValidate(userName, password);
-		
+		System.out.println(result);
 		if(result){
-			setSessionAttr("ad_channel_user", userName);
+			setSessionAttr("user", userName);
 			renderText("success");
 		}else{
 			renderText("fail");
