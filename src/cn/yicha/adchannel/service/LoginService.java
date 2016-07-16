@@ -1,6 +1,8 @@
 package cn.yicha.adchannel.service;
 
 import cn.yicha.adchannel.dao.UserDao;
+import cn.yicha.adchannel.model.User;
+import cn.yicha.adchannel.util.Md5Util;
 
 /** 
  * @TODO
@@ -32,7 +34,8 @@ public class LoginService {
 	 * @param password
 	 * @return
 	 */
-	public boolean loginValidate(String userName, String password){
-		return userDao.loginValidate(userName, password);
+	public User loginValidate(String userName, String password){
+		String madPass = Md5Util.md5(password);
+		return userDao.loginValidate(userName, madPass);
 	}
 }

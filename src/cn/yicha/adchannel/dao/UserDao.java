@@ -23,18 +23,13 @@ public class UserDao {
 	}
 	
 	/**
-	 * 判断用户是否为合法用户
+	 * 根据用户名，密码查找用户
 	 * @param userName
 	 * @param password
 	 * @return
 	 */
-	public boolean loginValidate(String userName, String password){
-		User user = User.dao.findFirst("select * from " + TABLE_NAME + " where name=? and pwd=?", userName, password);
-		if(user != null){
-			return true;
-		}else{
-			return false;
-		}
+	public User loginValidate(String userName, String password){
+		return User.dao.findFirst("select * from " + TABLE_NAME + " where name=? and pwd=?", userName, password);
 	}
 	
 }

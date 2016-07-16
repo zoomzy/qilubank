@@ -18,6 +18,7 @@ public class LoginInterceptor implements Interceptor {
 		// TODO Auto-generated method stub
 		Controller controller = inv.getController();
 		HttpSession session = controller.getSession();
+		session.setMaxInactiveInterval(30 * 60);
 		String userName = (String) session.getAttribute("user");
 		
 		if(userName == null || "".equals(userName)){
