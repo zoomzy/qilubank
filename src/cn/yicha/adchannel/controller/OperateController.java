@@ -3,6 +3,7 @@ package cn.yicha.adchannel.controller;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 
+import cn.yicha.adchannel.model.Document;
 import cn.yicha.adchannel.service.OperateService;
 /**
  * @TODO   增删查改相关的功能
@@ -13,19 +14,49 @@ public class OperateController extends Controller {
 	
 	private OperateService operateService = OperateService.getInstance();
 	/**
-	 * 接收查询5张表的请求
-	 * tableId=>1:module,2:program,3:item,4:document,5:picture
+	 * 查询模块和他的下级项目
 	 */
-	public void select(){
-		Integer tableId = Integer.parseInt(getPara("tableId"));
-		renderJson(operateService.select(tableId));
+	public void menu(){
+		renderJson(operateService.selectMenu());
+	}
+	/**
+	 * 根据项目id查询条目信息
+	 */
+	public void item(){
+		String id= getPara("id");
+		renderJson(operateService.selectItemByProgramId(Integer.parseInt(id)));
+	}
+	/**
+	 * 根据条目id查询文档信息
+	 */
+	public void doc(){
+		String id= getPara("id");
+		renderJson(operateService.selectDocByItemId(Integer.parseInt(id)));
+	}
+	/**
+	 * 根据条目id查询图片信息
+	 */
+	public void pic(){
+		String id= getPara("id");
+		renderJson(operateService.selectPicByItemId(Integer.parseInt(id)));
 	}
 	/**
 	 * 搜索框的模糊查询
 	 */
-	@Clear
-	public void selectDoc(){
-		String key = getPara("key");
+	public void search(){
+		String key = getPara("id");
 		renderJson(operateService.selectDoc(key));
+	}
+	/**
+	 * 文档的保存(新增和修改)
+	 * id==null true:文档的新增   false:文档的修改
+	 */
+	public void saveDoc(){ 
+		Document doc = getModel(Document.class);
+		Boolean bool = operateService.saveDoc(doc);
+		if(bool)
+			renderText("success");
+		else
+			renderText("fail");
 	}
 }

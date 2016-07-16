@@ -26,31 +26,38 @@ public class OperateDao {
 		return instance;
 	}
 	/**
-	 * 根据id查询不同的表
-	 * id=>1:module,2:program,3:item,4:document,5:picture
+	 * 查询模块表中的所有记录
+	 * @return
+	 */
+	public List selectModule(){
+		return Module.dao.find("select * from module");
+	}
+	/**
+	 * 根据项目id查询条目信息
 	 * @param id
 	 * @return
 	 */
-	public List select(Integer id){
-		List list = null;
-		switch(id){
-		case 1:
-			list = Module.dao.find("select * from module");
-			break;
-		case 2:
-			list = Program.dao.find("select * from program");
-			break;
-		case 3:
-			list = Item.dao.find("select * from item");
-			break;
-		case 4:
-			list = Document.dao.find("select * from document");
-			break;
-		case 5:
-			list= Picture.dao.find("select * from picture");
-			break;
-		}
-		return list;
+	public List selectItemByProgramId(Integer id){
+		return Item.dao.find("select * from item where program_id="+id);
+	}
+	/**
+	 * 根据条目id查询文档信息
+	 * @param id
+	 * @return
+	 */
+	public List selectDocByItemId(Integer id){
+		return Document.dao.find("select * from document where item_id="+id);
+	}
+	/**
+	 * 根据条目id查询图片信息
+	 * @param id
+	 * @return
+	 */
+	public List selectPicByItemId(Integer id){
+		return Picture.dao.find("select * from picture where item_id="+id);
+	}
+	public List selectProgramById(Integer id){
+		return  Program.dao.find("select * from program where module_id = "+id);
 	}
 	/**
 	 * 根据content中的关键字查询文档记录
@@ -59,5 +66,19 @@ public class OperateDao {
 	 */
 	public List selectDoc(String key){
 		return Document.dao.find("select * from document where content like '%"+key+"%'");
+	}
+	/**
+	 * 文档记录的新增或修改
+	 * @param itemId
+	 * @param content
+	 * @return
+	 */
+	public Boolean saveDoc(Document doc){
+		Boolean bool = null;
+		if(doc.getInt("id") == null)
+			bool = doc.save();
+		else
+			bool = doc.update();
+		return bool;
 	}
 }
