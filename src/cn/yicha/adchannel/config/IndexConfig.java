@@ -13,6 +13,11 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 
 import cn.yicha.adchannel.inteceptor.LoginInterceptor;
+import cn.yicha.adchannel.model.Document;
+import cn.yicha.adchannel.model.Item;
+import cn.yicha.adchannel.model.Module;
+import cn.yicha.adchannel.model.Picture;
+import cn.yicha.adchannel.model.Program;
 import cn.yicha.adchannel.model.User;
 import cn.yicha.adchannel.route.ControllerRoutes;
 
@@ -54,6 +59,16 @@ public class IndexConfig extends JFinalConfig {
 		arpYx.setShowSql(true);
 		// 系统用户表
 		arpYx.addMapping("user", User.class);
+		//模块表
+		arpYx.addMapping("module", Module.class);
+		//项目表
+		arpYx.addMapping("program", Program.class);
+		//条目表
+		arpYx.addMapping("item", Item.class);
+		//文档表
+		arpYx.addMapping("document", Document.class);
+		//图片表
+		arpYx.addMapping("picture", Picture.class);
 	}
 
 	@Override
