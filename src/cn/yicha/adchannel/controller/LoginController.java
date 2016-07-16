@@ -30,6 +30,8 @@ public class LoginController extends Controller {
 		String password = getPara("userpass");
 		User user = loginService.loginValidate(userName, password);
 		if(user != null){
+			//设置session过期时间为半小时
+			getSession().setMaxInactiveInterval(30 * 60);
 			setSessionAttr("user", userName);
 			setCookie("role", user.getInt("role").toString(), -1);
 		}
@@ -41,6 +43,7 @@ public class LoginController extends Controller {
 	 */
 	public void logout() {
 		setSessionAttr("user", "");
+		removeCookie("role");
 		redirect("/");
 	}
 }
