@@ -96,5 +96,5 @@ public class OperateDao {
 	 */
 	public boolean deletePic(String picId){
 		return Picture.dao.deleteById(picId);
-	}
+	} 
 }

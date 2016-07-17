@@ -107,5 +107,5 @@ public class OperateService {
 	 */
 	public boolean deletePic(String picId){
 		return operateDao.deletePic(picId);
-	}
+	} 
 }
